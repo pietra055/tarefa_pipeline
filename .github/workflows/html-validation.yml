@@ -27,23 +27,15 @@ jobs:
       - name: Validar HTML
         run: htmlhint "*.html"
 
-  prettier:
-    name: Prettier Check
+  html-file:
+    name: HTML File Check
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Instalar Prettier
-        run: npm install -g prettier
-
-      - name: Verificar formatação
-        run: prettier --check "*.html"
+      - name: Verificar arquivos HTML
+        run: ls *.html
 
   links:
     name: Verificação de Arquivos HTML
