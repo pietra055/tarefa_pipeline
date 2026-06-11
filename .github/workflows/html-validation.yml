@@ -1,0 +1,56 @@
+name: Validação HTML
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  htmlhint:
+    name: HTMLHint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar HTMLHint
+        run: npm install -g htmlhint
+
+      - name: Validar HTML
+        run: htmlhint "*.html"
+
+  prettier:
+    name: Prettier Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Prettier
+        run: npm install -g prettier
+
+      - name: Verificar formatação
+        run: prettier --check "*.html"
+
+  links:
+    name: Verificação de Arquivos HTML
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verificar se existe index.html
+        run: test -f index.html
